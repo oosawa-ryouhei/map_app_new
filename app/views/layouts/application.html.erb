@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
     <title><%= full_title(yield(:title)) %></title>
     <%= stylesheet_link_tag "application", media: "all",
                                            "data-turbolinks-track" => true %>
@@ -8,16 +9,26 @@
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
     
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-  </head>
-  <body>
+
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<style>
+		#map {
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+  <div id="map"></div>
     <%= render 'layouts/header' %>
     
     <div class="container">
-      <div id="map"></div>
       <%= yield %>
       <%= render 'layouts/footer' %>
     </div>
+    
+    
+
   <script>
     var latlng = new google.maps.LatLng(35.66, 139.69);
     var options = {
@@ -26,10 +37,8 @@
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    var map = new google.maps.Map(document.getElementById("map"), options);
+    var map = new google.maps.Map(document.getElementById('map'), options);
 
   </script>
-    
-    
-  </body>
+</body>
 </html>
