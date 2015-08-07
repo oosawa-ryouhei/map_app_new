@@ -7,12 +7,29 @@
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
   </head>
   <body>
     <%= render 'layouts/header' %>
+    
     <div class="container">
+      <div id="map"></div>
       <%= yield %>
       <%= render 'layouts/footer' %>
     </div>
+  <script>
+    var latlng = new google.maps.LatLng(35.66, 139.69);
+    var options = {
+        zoom: 15,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map = new google.maps.Map(document.getElementById("map"), options);
+
+  </script>
+    
+    
   </body>
 </html>
