@@ -12,12 +12,12 @@ describe "Static pages" do
     it { should_not have_title('| Home') }
   end
 
-  describe "Help page" do
-    before { visit help_path }
+  # describe "Help page" do
+  #   before { visit help_path }
 
-    it { should have_content('Help') }
-    it { should have_title(full_title('Help')) }
-  end
+  #   it { should have_content('Help') }
+  #   it { should have_title(full_title('Help')) }
+  # end
 
   describe "About page" do
     before { visit about_path }
