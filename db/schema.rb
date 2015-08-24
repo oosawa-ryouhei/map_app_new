@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150821025925) do
+ActiveRecord::Schema.define(version: 20150824225538) do
+
+  create_table "inputdata", force: true do |t|
+    t.float    "Escherichia_coli"
+    t.float    "Coliform_bacteria"
+    t.float    "COD"
+    t.float    "Temperature"
+    t.float    "Total_residual_hlorine"
+    t.float    "Ammonium_nitrogen"
+    t.float    "pH"
+    t.string   "weather"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"
