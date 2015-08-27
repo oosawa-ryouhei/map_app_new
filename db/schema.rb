@@ -11,20 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824225538) do
-
-  create_table "inputdata", force: true do |t|
-    t.float    "Escherichia_coli"
-    t.float    "Coliform_bacteria"
-    t.float    "COD"
-    t.float    "Temperature"
-    t.float    "Total_residual_hlorine"
-    t.float    "Ammonium_nitrogen"
-    t.float    "pH"
-    t.string   "weather"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20150827062846) do
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -32,8 +19,27 @@ ActiveRecord::Schema.define(version: 20150824225538) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
+    t.string   "remember_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
+  create_table "waterparks", force: true do |t|
+    t.float    "escherichia_coli"
+    t.float    "coliform_bacteria"
+    t.float    "COD"
+    t.float    "water_temperature"
+    t.float    "total_residual_chlorine"
+    t.float    "ammonium_nitrogen"
+    t.float    "pH"
+    t.string   "weather"
+    t.datetime "observed"
+    t.string   "place"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
