@@ -14,5 +14,13 @@ namespace :db do
                    password: password,
                    password_confirmation: password)
     end
+    
+    
+    # users = User.all(limit: 6)
+    # 50.times do
+    #   place = Faker::Lorem.sentence(5)
+    #   users.each { |user| user.waterparks.create!(place: place) }
+    # end
+
   end
 end

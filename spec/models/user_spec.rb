@@ -17,6 +17,7 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
+  it { should respond_to(:waterparks) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -111,4 +112,30 @@ describe User do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
   end
+  
+  describe "waterpark associations" do
+
+    before { @user.save }
+    let!(:older_waterpark) do
+      FactoryGirl.create(:waterpark, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_waterpark) do
+      FactoryGirl.create(:waterpark, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right waterparks in the right order" do
+      expect(@user.waterparks.to_a).to eq [newer_waterpark, older_waterpark]
+    end
+    
+    it "should destroy associated waterparks" do
+      waterparks = @user.waterparks.to_a
+      @user.destroy
+      expect(waterparks).not_to be_empty
+      waterparks.each do |waterpark|
+        expect(Waterpark.where(id: waterpark.id)).to be_empty
+      end
+    end
+  end
+  
+  
 end

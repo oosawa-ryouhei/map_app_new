@@ -1,3 +1,6 @@
 class Waterpark < ActiveRecord::Base
-    validates :escherichia_coli, presence: true
+    belongs_to :user
+    default_scope -> { order('created_at DESC') }
+    validates :place, presence: true, length: { maximum: 140 }
+    validates :user_id, presence: true
 end

@@ -8,4 +8,14 @@
       </h1>
     </section>
   </aside>
+  
+  <div class="span8">
+    <% if @user.waterparks.any? %>
+      <h3>Waterparks (<%= @user.waterparks.count %>)</h3>
+      <ol class="waterparks">
+        <%= render @waterparks %>
+      </ol>
+      <%= will_paginate @waterparks %>
+    <% end %>
+  </div>
 </div>
