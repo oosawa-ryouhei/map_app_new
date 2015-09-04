@@ -1,0 +1,11 @@
+<li>
+  <span class="place"><%= waterpark.place %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(waterpark.created_at) %> ago.
+  </span>
+  <% if current_user?(waterpark.user) %>
+    <%= link_to "delete", waterpark, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: waterpark.place %>
+  <% end %>
+</li>

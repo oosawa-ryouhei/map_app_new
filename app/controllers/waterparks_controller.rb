@@ -8,7 +8,7 @@ class WaterparksController < ApplicationController
       flash[:success] = "Waterpark created!"
       redirect_to root_url
     else
-      render 'static_pages/home'
+      render 'users/index'
     end
   end
 

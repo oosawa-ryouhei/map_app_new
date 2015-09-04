@@ -10,8 +10,7 @@
     var map = new google.maps.Map(document.getElementById('map'), options);
 
   </script>
-  
-<% if signed_in? %>
+  <% if signed_in? %>
 
   <div class="row">
     <aside class="span4">
@@ -23,16 +22,10 @@
       </section>
     </aside>
   </div>
-<% else %>
-
-
+<% end %>
 
   
 
-
-
- 
-<% end %>
 <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
 
 
