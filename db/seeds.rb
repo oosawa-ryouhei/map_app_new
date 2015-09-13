@@ -17,10 +17,15 @@ def csv_import(csv_name)
     # require path
 
     # WindowsのMicrosoft Excelの出力したCSVファイルを想定
-    CSV.foreach(path, { encoding: "cp932:utf-8", row_sep: "\r\n", headers: true }) do |row|
+    CSV.foreach(path, { encoding: "cp932:utf-8",  headers: true }) do |row|
       (csv_name.classify.constantize).new(row.to_hash).save
     end
   end
+  
+  
 end
 
-csv_import('parkdata')
+csv_import('waterparks')
+
+
+  

@@ -9,6 +9,8 @@
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     
 
     
@@ -17,7 +19,7 @@
   
     <%= render 'layouts/header' %>
     
-      <div class="container">
+    <div class="container">
           <% flash.each do |key, value| %>
               <div class="alert alert-<%= key %>"><%= value %></div>
           <% end %>
@@ -25,7 +27,7 @@
       <%= render 'layouts/footer' %>
       <%= debug(params) if Rails.env.development? %>
   </div>
-    
+
     
   
 </body>

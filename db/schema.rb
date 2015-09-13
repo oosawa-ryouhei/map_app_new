@@ -44,4 +44,6 @@ ActiveRecord::Schema.define(version: 20150904081206) do
     t.float    "ph"
   end
 
+  add_index "waterparks", ["user_id", "created_at"], name: "index_waterparks_on_user_id_and_created_at"
+
 end

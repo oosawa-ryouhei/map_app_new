@@ -1,0 +1,17 @@
+
+
+<table>
+  <tr>
+    <th>latitude</th>
+    <th>longitude</th>
+    
+  </tr>
+
+<% @waterparks.each do |waterpark| %>
+  <%= render waterpark %>
+  <tr>
+    <td><%= waterpark.latitude %></td>
+    <td><%= waterpark.longitude %></td>
+  </tr>
+<% end %>
+</table>

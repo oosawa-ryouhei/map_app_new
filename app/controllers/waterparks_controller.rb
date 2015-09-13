@@ -1,6 +1,10 @@
 class WaterparksController < ApplicationController
   before_action :signed_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
+  
+  def index
+    @waterparks = Waterpark.all
+  end
 
   def create
     @waterpark = current_user.waterparks.build(waterpark_params)
@@ -16,6 +20,7 @@ class WaterparksController < ApplicationController
     @waterpark.destroy
     redirect_to root_url
   end
+  
   
   private
 

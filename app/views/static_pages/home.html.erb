@@ -1,32 +1,38 @@
-  <div id="map"></div>
-  <script>
-    var latlng = new google.maps.LatLng(35.66, 139.69);
-    var options = {
+
+<div id="map"></div>
+<script>
+var latlng = new google.maps.LatLng(35.654938 , 139.7479837);
+var options = {
         zoom: 15,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-
     var map = new google.maps.Map(document.getElementById('map'), options);
+    
+    $(function(){
+        $.getJSON("/waterparks.json" , function(data){
+            for(i = 0; i < data.length; i += 1){
+                var latlng = new google.maps.LatLng(data[i].latitude , data[i].longitude);
+                
+                var marker = new google.maps.Marker({
+                   position: latlng,
+       
+                   map: map
+                });   
+            } 
+            
+        })
+    })
+ 
+</script>
 
-  </script>
-  <% if signed_in? %>
-
-  <div class="row">
-    <aside class="span4">
-      <section>
-        <%= render 'shared/user_info' %>
-      </section>
-      <section>
-        <%= render 'shared/waterpark_form' %>
-      </section>
-    </aside>
-  </div>
-<% end %>
-
-  
+<br />
 
 <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+
+
+
+
 
 
 
