@@ -2,6 +2,16 @@
 
 <table>
   <tr>
+    <th>observed</th>
+    <th>place</th>
+    <th>weather</th>
+    <th>e_coli</th>
+    <th>coliform_bacteria</th>
+    <th>cod</th>
+    <th>water_temperature</th>
+    <th>total_residual_cl</th>
+    <th>nh3_n</th>
+    <th>ph</th>
     <th>latitude</th>
     <th>longitude</th>
     
@@ -10,6 +20,16 @@
 <% @waterparks.each do |waterpark| %>
   <%= render waterpark %>
   <tr>
+    <td>observed</td>
+    <td>place</td>
+    <td>weather</td>
+    <td>e_coli</td>
+    <td>coliform_bacteria</td>
+    <td>cod</td>
+    <td>water_temperature</td>
+    <td>total_residual_cl</td>
+    <td>nh3_n</td>
+    <td>ph</td>
     <td><%= waterpark.latitude %></td>
     <td><%= waterpark.longitude %></td>
   </tr>
