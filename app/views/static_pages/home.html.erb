@@ -14,10 +14,20 @@ var options = {
             for(i = 0; i < data.length; i += 1){
                 var latlng = new google.maps.LatLng(data[i].latitude , data[i].longitude);
                 
+                var goldStar = {
+    path: 'M 20 80 v ' + (-data[i].water_temperature * 5 ),
+    fillColor: 'red',
+    fillOpacity: 0.8,
+    scale: 1,
+    strokeColor: 'red',
+    strokeWeight: 14
+  };
+
+                
                 var marker = new google.maps.Marker({
                    position: latlng,
                    map: map,
-                   icon: "/images/bou.png"
+                   icon: goldStar
                 });
 
             } 
