@@ -14,20 +14,20 @@ var options = {
             for(i = 0; i < data.length; i += 1){
                 var latlng = new google.maps.LatLng(data[i].latitude , data[i].longitude);
                 
-                var goldStar = {
-    path: 'M 20 80 v ' + (-data[i].water_temperature * 5 ),
-    fillColor: 'red',
-    fillOpacity: 0.8,
-    scale: 1,
-    strokeColor: 'red',
-    strokeWeight: 14
-  };
+                var wtg = {
+                    path: 'M 0 0 v ' + (-data[i].water_temperature * 3 ) ,
+                    fillColor: 'black',
+                    fillOpacity: 0.8,
+                    //scale: 2,
+                    strokeColor: 'red',
+                    strokeWeight: 14
+                 };
 
                 
                 var marker = new google.maps.Marker({
                    position: latlng,
                    map: map,
-                   icon: goldStar
+                   icon: wtg
                 });
 
             } 
@@ -39,7 +39,7 @@ var options = {
 
 <br />
 
-<%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+
 
 
 
