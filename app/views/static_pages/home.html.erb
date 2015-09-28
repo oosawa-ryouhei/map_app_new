@@ -1,39 +1,79 @@
 
 <div id="map"></div>
 <script>
-var latlng = new google.maps.LatLng(35.654938 , 139.7479837);
-var options = {
-        zoom: 15,
-        center: latlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById('map'), options);
-    
-    $(function(){
+$(function(){
         $.getJSON("/waterparks.json" , function(data){
-            for(i = 0; i < data.length; i += 1){
-                var latlng = new google.maps.LatLng(data[i].latitude , data[i].longitude);
-                
-                var wtg = {
-                    path: 'M 0 0 v ' + (-data[i].water_temperature * 3 ) ,
-                    fillColor: 'black',
-                    fillOpacity: 0.8,
-                    //scale: 2,
-                    strokeColor: 'red',
-                    strokeWeight: 14
+            var setno = data.length;
+            var lat = new Array();
+            var lng = new Array();
+            var wtg = new Array();
+            for(i = 0; i < data.length; i ++){
+                lat[i] = data[i].latitude
+                lng[i] = data[i].longitude
+                wtg[i] = data[i].water_temperature
+            }
+            initialize(setno,lat,lng,wtg);
+        });
+    }) ;
+function initialize(setno,lat,lng,wtg) {
+    var latlng = new google.maps.LatLng(35.654938 , 139.7479837);
+    var options = {
+            zoom: 15,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+    var map = new google.maps.Map(document.getElementById('map'), options);
+    for (var i = 0; i < setno; i++) {
+        var latlng = new google.maps.LatLng(lat[i],lng[i]);
+        var ic = {
+                    path: 'M 0 0 h 20 v ' + (-wtg[i] * 4 )  + 'h -20 z',
+                    strokeColor: 'black',
+                    strokeWeight: 3,
+                    fillColor: 'red',
+                    fillOpacity: 0.9
                  };
+        
+        createMarker(latlng,ic,map)
+    }
+}   
+function createMarker(latlng,ic,map){
+        var marker = new google.maps.Marker({position: latlng, icon: ic, map: map});
+}
 
+
+
+    // $(function(){
+    //     $.getJSON("/waterparks.json" , function(data){
+    //         for(i = 0; i < data.length; i += 1){
+    //             var latlng = new google.maps.LatLng(data[i].latitude , data[i].longitude);
                 
-                var marker = new google.maps.Marker({
-                   position: latlng,
-                   map: map,
-                   icon: wtg
-                });
+    //             var wtg = {
+    //                 path: 'M 0 0 h 20 v ' + (-data[i].water_temperature * 4 )  + 'h -20 z',
+    //                 strokeColor: 'black',
+    //                 strokeWeight: 3,
+    //                 fillColor: 'red',
+    //                 fillOpacity: 0.9
+    //              };
+                 
+    //             var marker = new google.maps.Marker({
+    //               position: latlng,
+    //               map: map,
+    //               icon: wtg
+    //             });
+                
+               
+               
+               
+    //             // var myInfoWindow = new google.maps.InfoWindow({
+    //             //     content: "公園名:" + (data[i].place) + "<br>" + "天気:" + (data[i].weather)
+    //             //   });
+                  
+    //               //myInfoWindow.open(map, marker);
 
-            } 
+    //         } 
             
-        })
-    })
+    //     })
+    // })
                 
 </script>
 
