@@ -22,6 +22,7 @@ var options = {
                 	}
                 	markers=[];
                 }
+                
                 function createEcolimarkers(data){
                     var icons = {
                         path: 'M 0 0 h 20 v ' + (-data / 40 )  + 'h -20 z',
@@ -152,42 +153,53 @@ var options = {
                 	
                 }
                 
-                //  createMarkers(data[i].water_temperature, 'temperature', markers);
-               
+                //createMarkers(data[i].water_temperature, 'temperature', markers);
+               var p1 = document.getElementById("d1");
+                p1.addEventListener('click', function(){
+                    for(i=0; i<data.length; i++){
+                        createMarkers(data[i].e_coli, 'e_coli', markers)
+                    }
+                });
                 
                 var p2 = document.getElementById("d2");
-                p2.addEventListener('click', function(){for(i = 0; i < data.length; i += 1){
-                    createMarkers(data[i].coliform_bacteria, 'coliform_bacteria', markers);
-                }
+                p2.addEventListener('click', function(){
+                    for(i=0; i<data.length; i++){
+                        createMarkers(data[i].coliform_bacteria, 'coliform_bacteria', markers)
+                    }
                 });
                 
                 var p3 = document.getElementById("d3");
-                p3.addEventListener('click', function(){for(i = 0; i < data.length; i += 1){
-                    createMarkers(data[i].cod, 'cod', markers);
-                }
+                p3.addEventListener('click', function(){
+                    
+                            for(var i = 0; i < 28; i += 1){
+                                createMarkers(data[i].cod, 'cod', markers);
+                            }
                 });
                 
                 var p4 = document.getElementById("d4");
-                p4.addEventListener('click', function(){for(i = 0; i < data.length; i += 1){
-                    createMarkers(data[i].water_temperature, 'temperature', markers);
-                }
+                p4.addEventListener('click', function(){
+                    for(i = 0; i < data.length; i += 1){
+                        createMarkers(data[i].water_temperature, 'temperature', markers);
+                    }
                 });
-                
                 
                 var p5 = document.getElementById("d5");
-                p5.addEventListener('click', function(){for(i = 0; i < data.length; i += 1){
-                    createMarkers(data[i].total_residual_cl, 'total_residual_cl', markers);
-                }
+                p5.addEventListener('click', function(){
+                    for(i = 0; i < data.length; i += 1){
+                        createMarkers(data[i].total_residual_cl, 'total_residual_cl', markers);
+                    }    
                 });
                 var p6 = document.getElementById("d6");
-                p6.addEventListener('click', function(){for(i = 0; i < data.length; i += 1){
-                    createMarkers(data[i].nh3_n, 'nh3_n', markers);
-                }
+                p6.addEventListener('click', function(){
+                    for(i = 0; i < data.length; i += 1){
+                        createMarkers(data[i].nh3_n, 'nh3_n', markers);
+                    }
                 });
                 var p7 = document.getElementById("d7");
-                p7.addEventListener('click', function(){for(i = 0; i < data.length; i += 1){
-                    createMarkers(data[i].ph, 'ph', markers);
-                }
+                p7.addEventListener('click', function(){
+                    for(i = 0; i < data.length; i += 1){
+                        createMarkers(data[i].ph, 'ph', markers);
+                    }
                 });
                 
                 
@@ -323,12 +335,7 @@ var options = {
             
         })
     })
-          var p1 = document.getElementById("d1");
-                p1.addEventListener('click', function(){for(var a = 0; a < data.length; a += 1){
-                    createMarkers(data[a].e_coli, 'e_coli', markers);
-                    
-                }
-                });      
+                
 </script>
 
 <br />
