@@ -221,6 +221,7 @@ $.getJSON("/waterparks.json", function (data) {
         createMarkers(data, 'e_coli', markers);
         //クリックによるページ切替を行わない処理
         event.preventDefault();
+        console.log("get1");
     });
 
     p2 = document.getElementById("d2");
@@ -228,6 +229,7 @@ $.getJSON("/waterparks.json", function (data) {
         deleteMarkers(markers);
         createMarkers(data, 'coliform_bacteria', markers);
         event.preventDefault();
+        console.log("get2");
     });
 
     p3 = document.getElementById("d3");
@@ -235,6 +237,7 @@ $.getJSON("/waterparks.json", function (data) {
         deleteMarkers(markers);
         createMarkers(data, 'cod', markers);
         event.preventDefault();
+        console.log("get3");
     });
 
     p4 = document.getElementById("d4");
@@ -242,6 +245,7 @@ $.getJSON("/waterparks.json", function (data) {
         deleteMarkers(markers);
         createMarkers(data, 'temperature', markers);
         event.preventDefault();
+        console.log("get4");
     });
 
     p5 = document.getElementById("d5");
@@ -249,6 +253,7 @@ $.getJSON("/waterparks.json", function (data) {
         deleteMarkers(markers);
         createMarkers(data, 'total_residual_cl', markers);
         event.preventDefault();
+        console.log("get5");
     });
 
     p6 = document.getElementById("d6");
@@ -256,6 +261,7 @@ $.getJSON("/waterparks.json", function (data) {
         deleteMarkers(markers);
         createMarkers(data, 'nh3_n', markers);
         event.preventDefault();
+        console.log("get6");
     });
 
     p7 = document.getElementById("d7");
@@ -263,6 +269,7 @@ $.getJSON("/waterparks.json", function (data) {
         deleteMarkers(markers);
         createMarkers(data, 'ph', markers);
         event.preventDefault();
+        console.log("get7");
     });
 });
 
