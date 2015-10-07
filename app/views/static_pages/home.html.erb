@@ -1,6 +1,6 @@
 <div id="map"></div>
 <script>
-//グラフの基礎データ設定
+//マップの基礎データ設定
 var latlng = new google.maps.LatLng(35.654938, 139.7479837);
 var options = {
     zoom: 15,
@@ -8,6 +8,7 @@ var options = {
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };
 var map = new google.maps.Map(document.getElementById('map'), options);
+//マーカーを入れる配列を定義
 var markers = [];
 
 //マーカーを全部消す関数
