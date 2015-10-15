@@ -5,13 +5,10 @@
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
-          
           <% if signed_in? %>
-            
-            
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                項目 <b class="caret"></b>
+              項目 <b class="caret"></b>
               </a>
               <!--a要素の中にidを設定-->
               <ul class="dropdown-menu">

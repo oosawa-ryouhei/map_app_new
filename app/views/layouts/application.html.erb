@@ -3,32 +3,23 @@
 <head>
     <meta charset="utf-8">
     <title>親水公園の水質調査のマッピング</title>
-    <%= stylesheet_link_tag "application", media: "all",
-                                           "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    
-
-    
 </head>
 <body>
-  
     <%= render 'layouts/header' %>
-    
     <div class="container">
-          <% flash.each do |key, value| %>
-              <div class="alert alert-<%= key %>"><%= value %></div>
-          <% end %>
-      <%= yield %>
-      <%= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
-  </div>
-
-    
-  
+        <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+        <%= yield %>
+        <%= render 'layouts/footer' %>
+        <!--<%= debug(params) if Rails.env.development? %>-->
+    </div>
 </body>
 </html>
