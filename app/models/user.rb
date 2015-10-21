@@ -1,7 +1,4 @@
 class User < ActiveRecord::Base
-  #userがwaterparksを複数持ってる関連付
-  has_many :waterparks, dependent: :destroy
-  
   #保存する前にemailを小文字に変える
   before_save { self.email = email.downcase }
   
@@ -29,11 +26,13 @@ class User < ActiveRecord::Base
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end
-
-　#暗号化
+  
+  #暗号化
   def User.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
+  
+
 
   private
     # User生成時、before_createコールバックから呼び出す。

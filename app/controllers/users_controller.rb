@@ -1,21 +1,25 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
+  #アクション実行前に定義する
+  before_action :signed_in_user, only: [:edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
-
-  def index
-    @users = User.paginate(page: params[:page])
-  end
   
+  #すべてのユーザーを表示するページ
+  # def index
+  #   @users = User.paginate(page: params[:page])
+  # end
+  
+  #特定のユーザーを表示するページ
   def show
     @user = User.find(params[:id])
-    @waterparks = @user.waterparks.paginate(page: params[:page])
   end
-
+  
+  #ユーザーを新規作成するページ (ユーザー登録)
   def new
     @user = User.new
   end
   
+  #ユーザーを作成するアクション
   def create
     @user = User.new(user_params)
     if @user.save
@@ -27,9 +31,11 @@ class UsersController < ApplicationController
     end
   end
   
+  #ユーザーを編集するページ
   def edit
   end
-
+  
+  #ユーザー情報を更新するアクション
   def update
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
@@ -39,6 +45,7 @@ class UsersController < ApplicationController
     end
   end
   
+  #ユーザーを削除するアクション
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
@@ -54,18 +61,22 @@ class UsersController < ApplicationController
     
     # Before actions
 
+    
     def signed_in_user
       unless signed_in?
-        store_location
+        store_location #ユーザーがいたページを記憶
         redirect_to signin_url, notice: "Please sign in."
       end
     end
 
+    #不正なユーザーがsigninページに行かないように（Homeへ飛ばす）
     def correct_user
       @user = User.find(params[:id])
+      #ログインしているユーザーであればroot_pathを実行
       redirect_to(root_path) unless current_user?(@user)
     end
     
+    #destroyアクションから管理者へのアクセスを制限する
     def admin_user
       redirect_to(root_path) unless current_user.admin?
     end
