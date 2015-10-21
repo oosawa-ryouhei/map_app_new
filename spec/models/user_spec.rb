@@ -80,8 +80,11 @@ describe User do
   #既に使われているemail addressだった場合
   describe "when email address is already taken" do
     before do
+      #@userをコピーしてuser_with_same_emailを作る
       user_with_same_email = @user.dup
+      #@userのemailを大文字にしてuser_with_same_emailに設定
       user_with_same_email.email = @user.email.upcase
+      #user_with_same_emailを保存する（@userは保存されていない）
       user_with_same_email.save
     end
 
@@ -97,7 +100,7 @@ describe User do
     it { should_not be_valid }
   end
   
-  #passwordとconfirmationが一致しなかった場合
+  #passwordとpassword_confirmationが一致しなかった場合
   describe "when password doesn't match confirmation" do
     before { @user.password_confirmation = "mismatch" }
     it { should_not be_valid }
@@ -112,6 +115,7 @@ describe User do
   #入力したパスワードが一致する場合としない場合
   describe "return value of authenticate method" do
     before { @user.save }
+    #@userとemailが一致するユーザーをデータベースから探してくる
     let(:found_user) { User.find_by(email: @user.email) }
     
     #一致した場合
@@ -121,16 +125,20 @@ describe User do
 
     #一致しない場合
     describe "with invalid password" do
+      #user_for_invalid_passwordに無効なpasswordで認証した結果を入れる
       let(:user_for_invalid_password) { found_user.authenticate("invalid") }
-
+      
       it { should_not eq user_for_invalid_password }
+      #user_for_invalid_passwordはfalseだよ
       specify { expect(user_for_invalid_password).to be_false }
     end
   end
   
   #remember tokenが有効であるかを確認（空欄ではない）
   describe "remember token" do
+    #@user保存するとremenber_tokenが生成
     before { @user.save }
+    #its(:remenber_token)は@user.remember_token
     its(:remember_token) { should_not be_blank }
   end
 end

@@ -1,11 +1,16 @@
-<!--<li>-->
-<!--  <span class="place"><%= waterpark.place %></span>-->
-<!--  <span class="timestamp">-->
-<!--    Posted <%= time_ago_in_words(waterpark.created_at) %> ago.-->
-<!--  </span>-->
-<!--  <% if current_user?(waterpark.user) %>-->
-<!--    <%= link_to "delete", waterpark, method: :delete,-->
-<!--                                     data: { confirm: "You sure?" },-->
-<!--                                     title: waterpark.place %>-->
-<!--  <% end %>-->
-<!--</li>-->
+<tr>
+    <td><%= waterpark.place %></td>
+    <td><%= time_ago_in_words(waterpark.created_at) %></td>
+    <td><%= waterpark.observed %></td>
+    <td><%= waterpark.place %></td>
+    <td><%= waterpark.weather %></td>
+    <td><%= waterpark.e_coli %></td>
+    <td><%= waterpark.coliform_bacteria %></td>
+    <td><%= waterpark.cod %></td>
+    <td><%= waterpark.water_temperature %></td>
+    <td><%= waterpark.total_residual_cl %></td>
+    <td><%= waterpark.nh3_n %></td>
+    <td><%= waterpark.ph %></td>
+    <td><%= waterpark.latitude %></td>
+    <td><%= waterpark.longitude %></td>
+</tr>
