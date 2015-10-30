@@ -1,7 +1,10 @@
+/*jslint browser:true, for:true */
+/*global google, $ */
+var data_labels = [];
 //マップの基礎データ設定
 var latlng = new google.maps.LatLng(35.654938, 139.7479837);
 var options = {
-    zoom: 15,
+    zoom: 11,
     center: latlng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };
@@ -9,8 +12,7 @@ var map = new google.maps.Map(document.getElementById('map'), options);
 //マーカーを入れる配列を定義
 var markers = [];
 
-//グラフの太さ
-var graph_y = 15;
+
 
 //マーカーを全部消す関数
 function deleteMarkers(markers) {
@@ -22,254 +24,60 @@ function deleteMarkers(markers) {
     markers = [];
 }
 
-//大腸菌のマーカー（グラフ）を生成関数
-function createEcolimarkers(data, markers) {
-    'use strict';
-    var i, icon, marker;
-    for (i = 0; i < data.length; i = i + 1) {
-        icon = {
-            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].e_coli / 40) + 'h -'+ graph_y +' z',
-            strokeColor: 'black',
-            strokeWeight: 3,
-            fillColor: 'red',
-            fillOpacity: 0.9
-        };
-        latlng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-
-        marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-            icon: icon
-        });
-
-        markers.push(marker);
-    }
-}
-
-//大腸菌群のマーカー（グラフ）を生成関数
-function createBacteriamarkers(data) {
-    'use strict';
-    var i, icon, marker;
-    for (i = 0; i < data.length; i = i + 1) {
-        icon = {
-            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].coliform_bacteria / 40) + 'h -'+ graph_y +' z',
-            strokeColor: 'black',
-            strokeWeight: 3,
-            fillColor: 'magenta',
-            fillOpacity: 0.9
-        };
-        latlng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-
-        marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-            icon: icon
-        });
-
-        markers.push(marker);
-    }
-}
-
-//CODのマーカー（グラフ）を生成関数
-function createCodmarkers(data) {
-    'use strict';
-    var i, icon, marker;
-    for (i = 0; i < data.length; i = i + 1) {
-        icon = {
-            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].cod * 10) + 'h -'+ graph_y +' z',
-            strokeColor: 'black',
-            strokeWeight: 3,
-            fillColor: 'green',
-            fillOpacity: 0.9
-        };
-        latlng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-
-        marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-            icon: icon
-        });
-
-        markers.push(marker);
-    }
-}
-
-//水温のマーカー（グラフ）を生成関数
-function createTmarkers(data) {
-    'use strict';
-    var i, icon, marker;
-    for (i = 0; i < data.length; i = i + 1) {
-        icon = {
-            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].water_temperature * 4) + 'h -'+ graph_y +' z',
-            strokeColor: 'black',
-            strokeWeight: 3,
-            fillColor: 'cyan',
-            fillOpacity: 0.9
-        };
-        latlng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-
-        marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-            icon: icon
-        });
-
-        markers.push(marker);
-    }
-}
-
-//総残留塩素のマーカー（グラフ）を生成関数
-function createClmarkers(data) {
-    'use strict';
-    var i, icon, marker;
-    for (i = 0; i < data.length; i = i + 1) {
-        icon = {
-            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].total_residual_cl * 150) + 'h -'+ graph_y +' z',
-            strokeColor: 'black',
-            strokeWeight: 3,
-            fillColor: 'yellow',
-            fillOpacity: 0.9
-        };
-        latlng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-
-        marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-            icon: icon
-        });
-
-        markers.push(marker);
-    }
-}
-
-//アンモニウム態窒素のマーカー（グラフ）を生成関数
-function createNH3markers(data) {
-    'use strict';
-    var i, icon, marker;
-    for (i = 0; i < data.length; i = i + 1) {
-        icon = {
-            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].nh3_n * 500) + 'h -'+ graph_y +' z',
-            strokeColor: 'black',
-            strokeWeight: 3,
-            fillColor: 'pink',
-            fillOpacity: 0.9
-        };
-        latlng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-
-        marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-            icon: icon
-        });
-
-        markers.push(marker);
-    }
-}
-
-//PHのマーカー（グラフ）を生成関数
-function createPHmarkers(data) {
-    'use strict';
-    var i, icon, marker;
-    for (i = 0; i < data.length; i = i + 1) {
-        icon = {
-            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].ph * 12) + 'h -'+ graph_y +' z',
-            strokeColor: 'black',
-            strokeWeight: 3,
-            fillColor: 'purple',
-            fillOpacity: 0.9
-        };
-        latlng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-
-        marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-            icon: icon
-        });
-
-        markers.push(marker);
-    }
-}
-
 //itemによって作るマーカー（グラフ）を変える関数
-function createMarkers(data, item, markers) {
+function createMarkers(data, item, scale, markers) {
     'use strict';
-    if (item === "temperature") {
-        createTmarkers(data, markers);
-    } else if (item === 'cod') {
-        createCodmarkers(data, markers);
-    } else if (item === 'e_coli') {
-        createEcolimarkers(data, markers);
-    } else if (item === 'coliform_bacteria') {
-        createBacteriamarkers(data, markers);
-    } else if (item === 'total_residual_cl') {
-        createClmarkers(data, markers);
-    } else if (item === 'nh3_n') {
-        createNH3markers(data, markers);
-    } else if (item === 'ph') {
-        createPHmarkers(data, markers);
+    //グラフの横幅
+    var graph_w = 15;
+    var i, icon, marker;
+    for (i = 0; i < data.length; i = i + 1) {
+        if (data[i][item] !== null) {
+            icon = {
+                path: 'M 0 0 h ' + graph_w + ' v ' + (-data[i][item] * scale) + 'h -' + graph_w + ' z',
+                strokeColor: 'black',
+                strokeWeight: 3,
+                fillColor: 'red',
+                fillOpacity: 0.9
+            };
+            latlng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
+
+            marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                icon: icon
+            });
+            markers.push(marker);
+        }
     }
 }
-//JSONデータを習得
-$.getJSON("/waterparks.json", function (data) {
-    'use strict';
 
-    var p1, p2, p3, p4, p5, p6, p7;
-    
-    //項目クリックによるイベントを習得（P1~P7の7項目）
-    p1 = document.getElementById("d1");
-    p1.addEventListener('click', function (event) {
+var settingEventlistener = function (id, kind, scale, data, markers) {
+    'use strict';
+    var element;
+    element = document.getElementById(id);
+    element.addEventListener('click', function (event) {
         deleteMarkers(markers);
-        createMarkers(data, 'e_coli', markers);
+        createMarkers(data, kind, scale, markers);
         //クリックによるページ切替を行わない処理
         event.preventDefault();
-        console.log("get1");
     });
+};
 
-    p2 = document.getElementById("d2");
-    p2.addEventListener('click', function (event) {
-        deleteMarkers(markers);
-        createMarkers(data, 'coliform_bacteria', markers);
-        event.preventDefault();
-        console.log("get2");
-    });
-
-    p3 = document.getElementById("d3");
-    p3.addEventListener('click', function (event) {
-        deleteMarkers(markers);
-        createMarkers(data, 'cod', markers);
-        event.preventDefault();
-        console.log("get3");
-    });
-
-    p4 = document.getElementById("d4");
-    p4.addEventListener('click', function (event) {
-        deleteMarkers(markers);
-        createMarkers(data, 'temperature', markers);
-        event.preventDefault();
-        console.log("get4");
-    });
-
-    p5 = document.getElementById("d5");
-    p5.addEventListener('click', function (event) {
-        deleteMarkers(markers);
-        createMarkers(data, 'total_residual_cl', markers);
-        event.preventDefault();
-        console.log("get5");
-    });
-
-    p6 = document.getElementById("d6");
-    p6.addEventListener('click', function (event) {
-        deleteMarkers(markers);
-        createMarkers(data, 'nh3_n', markers);
-        event.preventDefault();
-        console.log("get6");
-    });
-
-    p7 = document.getElementById("d7");
-    p7.addEventListener('click', function (event) {
-        deleteMarkers(markers);
-        createMarkers(data, 'ph', markers);
-        event.preventDefault();
-        console.log(data);
+$(document).ready(function () {
+    'use strict';
+    $.getJSON("/waterparks.json", function (data) {
+        data_labels = [
+            {id: "d1", kind: "e_coli", scale: 1 / 40},
+            {id: "d2", kind: "coliform_bacteria", scale: 1 / 40},
+            {id: "d3", kind: "cod", scale: 10},
+            {id: "d4", kind: "water_temperature", scale: 4},
+            {id: "d5", kind: "total_residual_cl", scale: 150},
+            {id: "d6", kind: "nh3_n", scale: 500},
+            {id: "d7", kind: "ph", scale: 12}
+        ];
+        var i;
+        for (i = 0; i < data_labels.length; i = i + 1) {
+            settingEventlistener(data_labels[i].id, data_labels[i].kind, data_labels[i].scale, data, markers);
+        }
     });
 });

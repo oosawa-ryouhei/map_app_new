@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :waterparks
   #保存する前にemailを小文字に変える
   before_save { self.email = email.downcase }
   
