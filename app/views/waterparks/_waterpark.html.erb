@@ -1,8 +1,6 @@
 <tr>
     <td><%= waterpark.place %></td>
-    <td><%= time_ago_in_words(waterpark.created_at) %></td>
     <td><%= waterpark.observed %></td>
-    <td><%= waterpark.place %></td>
     <td><%= waterpark.weather %></td>
     <td><%= waterpark.e_coli %></td>
     <td><%= waterpark.coliform_bacteria %></td>
@@ -13,4 +11,5 @@
     <td><%= waterpark.ph %></td>
     <td><%= waterpark.latitude %></td>
     <td><%= waterpark.longitude %></td>
+    <td><%= time_ago_in_words(waterpark.created_at) %></td>
 </tr>

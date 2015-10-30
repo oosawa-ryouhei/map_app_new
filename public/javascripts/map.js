@@ -9,6 +9,9 @@ var map = new google.maps.Map(document.getElementById('map'), options);
 //マーカーを入れる配列を定義
 var markers = [];
 
+//グラフの太さ
+var graph_y = 15;
+
 //マーカーを全部消す関数
 function deleteMarkers(markers) {
     'use strict';
@@ -25,7 +28,7 @@ function createEcolimarkers(data, markers) {
     var i, icon, marker;
     for (i = 0; i < data.length; i = i + 1) {
         icon = {
-            path: 'M 0 0 h 20 v ' + (-data[i].e_coli / 40) + 'h -20 z',
+            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].e_coli / 40) + 'h -'+ graph_y +' z',
             strokeColor: 'black',
             strokeWeight: 3,
             fillColor: 'red',
@@ -49,7 +52,7 @@ function createBacteriamarkers(data) {
     var i, icon, marker;
     for (i = 0; i < data.length; i = i + 1) {
         icon = {
-            path: 'M 0 0 h 20 v ' + (-data[i].coliform_bacteria / 40) + 'h -20 z',
+            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].coliform_bacteria / 40) + 'h -'+ graph_y +' z',
             strokeColor: 'black',
             strokeWeight: 3,
             fillColor: 'magenta',
@@ -73,7 +76,7 @@ function createCodmarkers(data) {
     var i, icon, marker;
     for (i = 0; i < data.length; i = i + 1) {
         icon = {
-            path: 'M 0 0 h 20 v ' + (-data[i].cod * 10) + 'h -20 z',
+            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].cod * 10) + 'h -'+ graph_y +' z',
             strokeColor: 'black',
             strokeWeight: 3,
             fillColor: 'green',
@@ -97,7 +100,7 @@ function createTmarkers(data) {
     var i, icon, marker;
     for (i = 0; i < data.length; i = i + 1) {
         icon = {
-            path: 'M 0 0 h 20 v ' + (-data[i].water_temperature * 4) + 'h -20 z',
+            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].water_temperature * 4) + 'h -'+ graph_y +' z',
             strokeColor: 'black',
             strokeWeight: 3,
             fillColor: 'cyan',
@@ -121,7 +124,7 @@ function createClmarkers(data) {
     var i, icon, marker;
     for (i = 0; i < data.length; i = i + 1) {
         icon = {
-            path: 'M 0 0 h 20 v ' + (-data[i].total_residual_cl * 900) + 'h -20 z',
+            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].total_residual_cl * 150) + 'h -'+ graph_y +' z',
             strokeColor: 'black',
             strokeWeight: 3,
             fillColor: 'yellow',
@@ -145,7 +148,7 @@ function createNH3markers(data) {
     var i, icon, marker;
     for (i = 0; i < data.length; i = i + 1) {
         icon = {
-            path: 'M 0 0 h 20 v ' + (-data[i].nh3_n * 500) + 'h -20 z',
+            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].nh3_n * 500) + 'h -'+ graph_y +' z',
             strokeColor: 'black',
             strokeWeight: 3,
             fillColor: 'pink',
@@ -169,7 +172,7 @@ function createPHmarkers(data) {
     var i, icon, marker;
     for (i = 0; i < data.length; i = i + 1) {
         icon = {
-            path: 'M 0 0 h 20 v ' + (-data[i].ph * 12) + 'h -20 z',
+            path: 'M 0 0 h '+ graph_y +' v ' + (-data[i].ph * 12) + 'h -'+ graph_y +' z',
             strokeColor: 'black',
             strokeWeight: 3,
             fillColor: 'purple',
