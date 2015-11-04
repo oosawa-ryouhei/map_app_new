@@ -22,6 +22,7 @@ function deleteMarkers(markers) {
     markers = [];
 }
 
+//情報ウィンドウを作成する関数
 function createInfoWin(map,marker,data,i,item){
     //マーカー毎にinfoWindowを作成
     var infoWindow = new google.maps.InfoWindow({ 
@@ -67,7 +68,7 @@ function createMarkers(data, item, scale, markers) {
 
 
 
-var settingEventlistener = function (id, kind, scale, data, markers) {
+var settingEventlistener = function (id, kind, scale, data, markers, name) {
     'use strict';
     var element;
     element = document.getElementById(id);
@@ -76,26 +77,30 @@ var settingEventlistener = function (id, kind, scale, data, markers) {
         createMarkers(data, kind, scale, markers);
         //クリックによるページ切替を行わない処理
         event.preventDefault();
+        selectTxt(name);
+        
     });
 };
-
-
 
 $(document).ready(function () {
     'use strict';
     $.getJSON("/waterparks.json", function (data) {
         data_labels = [
-            {id: "d1", kind: "e_coli", scale: 1 / 40},
-            {id: "d2", kind: "coliform_bacteria", scale: 1 / 40},
-            {id: "d3", kind: "cod", scale: 10},
-            {id: "d4", kind: "water_temperature", scale: 4},
-            {id: "d5", kind: "total_residual_cl", scale: 150},
-            {id: "d6", kind: "nh3_n", scale: 500},
-            {id: "d7", kind: "ph", scale: 12}
+            {id: "d1", kind: "e_coli", scale: 1 / 40, name: "大腸菌"},
+            {id: "d2", kind: "coliform_bacteria", scale: 1 / 40, name: "大腸菌群"},
+            {id: "d3", kind: "cod", scale: 10, name: "cod"},
+            {id: "d4", kind: "water_temperature", scale: 4, name: "水温"},
+            {id: "d5", kind: "total_residual_cl", scale: 150, name: "総残留塩素"},
+            {id: "d6", kind: "nh3_n", scale: 500, name: "アンモニウム態窒素"},
+            {id: "d7", kind: "ph", scale: 12, name: "ph"}
         ];
         var i;
         for (i = 0; i < data_labels.length; i = i + 1) {
-            settingEventlistener(data_labels[i].id, data_labels[i].kind, data_labels[i].scale, data, markers);
+            settingEventlistener(data_labels[i].id, data_labels[i].kind, data_labels[i].scale, data, markers, data_labels[i].name);
         }
     });
 });
+
+function selectTxt(name) {
+    document.getElementById("text").innerHTML=name;
+}
