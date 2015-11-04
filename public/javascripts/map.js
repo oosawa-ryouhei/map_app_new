@@ -12,8 +12,6 @@ var map = new google.maps.Map(document.getElementById('map'), options);
 //マーカーを入れる配列を定義
 var markers = [];
 
-
-
 //マーカーを全部消す関数
 function deleteMarkers(markers) {
     'use strict';
@@ -22,6 +20,21 @@ function deleteMarkers(markers) {
         markers[j].setMap(null);
     }
     markers = [];
+}
+
+function createInfoWin(map,marker,data,i,item){
+    //マーカー毎にinfoWindowを作成
+    var infoWindow = new google.maps.InfoWindow({ 
+        //情報ウィンドウ内に表示する
+        content: '場所：'+ data[i].place
+                + '<br>調査日時：'+ data[i].observed
+                + '<br>天気：'+ data[i].weather
+                + '<br>'+ item +'：'+ data[i][item]
+
+    }); 
+    google.maps.event.addListener(marker,'click',function(){
+        infoWindow.open(map,marker);
+    });
 }
 
 //itemによって作るマーカー（グラフ）を変える関数
@@ -47,9 +60,12 @@ function createMarkers(data, item, scale, markers) {
                 icon: icon
             });
             markers.push(marker);
+            createInfoWin(map,marker,data,i,item);
         }
     }
 }
+
+
 
 var settingEventlistener = function (id, kind, scale, data, markers) {
     'use strict';
@@ -62,6 +78,8 @@ var settingEventlistener = function (id, kind, scale, data, markers) {
         event.preventDefault();
     });
 };
+
+
 
 $(document).ready(function () {
     'use strict';
