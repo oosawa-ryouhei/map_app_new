@@ -47,11 +47,11 @@ function createMarkers(data, item, scale, markers) {
     for (i = 0; i < data.length; i = i + 1) {
         if (data[i][item] !== null) {
             icon = {
-                path: 'M 0 0 h ' + graph_w + ' v ' + (-data[i][item] * scale) + 'h -' + graph_w + ' z',
+                path: 'M 0 0 a 7.5 5 0 1 0 ' + graph_w + ' 0 v ' + (-data[i][item] * scale) + ' a ' + graph_w / 2 + ' 5 0 1 1 ' + -graph_w + ' 0 a ' + graph_w / 2 + ' 5 0 1 1 ' + graph_w + ' 0 a ' + graph_w / 2 + ' 5 0 1 1 ' + -graph_w + ' 0 z',
                 strokeColor: 'black',
-                strokeWeight: 3,
+                strokeWeight: 2,
                 fillColor: 'red',
-                fillOpacity: 0.9
+                fillOpacity: 0.8
             };
             latlng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
 
@@ -66,8 +66,6 @@ function createMarkers(data, item, scale, markers) {
     }
 }
 
-
-
 var settingEventlistener = function (id, kind, scale, data, markers, name) {
     'use strict';
     var element;
@@ -78,7 +76,6 @@ var settingEventlistener = function (id, kind, scale, data, markers, name) {
         //クリックによるページ切替を行わない処理
         event.preventDefault();
         selectTxt(name);
-        
     });
 };
 
@@ -88,7 +85,7 @@ $(document).ready(function () {
         data_labels = [
             {id: "d1", kind: "e_coli", scale: 1 / 40, name: "大腸菌"},
             {id: "d2", kind: "coliform_bacteria", scale: 1 / 40, name: "大腸菌群"},
-            {id: "d3", kind: "cod", scale: 10, name: "cod"},
+            {id: "d3", kind: "cod", scale: 10, name: "COD"},
             {id: "d4", kind: "water_temperature", scale: 4, name: "水温"},
             {id: "d5", kind: "total_residual_cl", scale: 150, name: "総残留塩素"},
             {id: "d6", kind: "nh3_n", scale: 500, name: "アンモニウム態窒素"},
