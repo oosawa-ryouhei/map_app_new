@@ -23,14 +23,14 @@ function deleteMarkers(markers) {
 }
 
 //情報ウィンドウを作成する関数
-function createInfoWin(map,marker,data,i,item){
+function createInfoWin(map,marker,data,i,item,name){
     //マーカー毎にinfoWindowを作成
     var infoWindow = new google.maps.InfoWindow({ 
         //情報ウィンドウ内に表示する
         content: '場所：'+ data[i].place
                 + '<br>調査日時：'+ data[i].observed
                 + '<br>天気：'+ data[i].weather
-                + '<br>'+ item +'：'+ data[i][item]
+                + '<br>'+ name +'：'+ data[i][item]
 
     }); 
     google.maps.event.addListener(marker,'click',function(){
@@ -39,15 +39,16 @@ function createInfoWin(map,marker,data,i,item){
 }
 
 //itemによって作るマーカー（グラフ）を変える関数
-function createMarkers(data, item, scale, markers) {
+function createMarkers(data, item, scale, markers, name) {
     'use strict';
     //グラフの横幅
     var graph_w = 15;
+    var arc_y = 5;
     var i, icon, marker;
     for (i = 0; i < data.length; i = i + 1) {
         if (data[i][item] !== null) {
             icon = {
-                path: 'M 0 0 a 7.5 5 0 1 0 ' + graph_w + ' 0 v ' + (-data[i][item] * scale) + ' a ' + graph_w / 2 + ' 5 0 1 1 ' + -graph_w + ' 0 a ' + graph_w / 2 + ' 5 0 1 1 ' + graph_w + ' 0 a ' + graph_w / 2 + ' 5 0 1 1 ' + -graph_w + ' 0 z',
+                path: 'M 0 0 a ' + graph_w / 2 + ','+ arc_y +'  0 1 0 ' + graph_w + ' 0 v ' + (-data[i][item] * scale) + ' a ' + graph_w / 2 + ','+ arc_y +' 0 1 1 ' + -graph_w + ' 0 a ' + graph_w / 2 + ','+ arc_y +' 0 1 1 ' + graph_w + ' 0 a ' + graph_w / 2 + ','+ arc_y +' 0 1 1 ' + -graph_w + ' 0 z',
                 strokeColor: 'black',
                 strokeWeight: 2,
                 fillColor: 'red',
@@ -61,7 +62,7 @@ function createMarkers(data, item, scale, markers) {
                 icon: icon
             });
             markers.push(marker);
-            createInfoWin(map,marker,data,i,item);
+            createInfoWin(map,marker,data,i,item,name);
         }
     }
 }
@@ -72,7 +73,7 @@ var settingEventlistener = function (id, kind, scale, data, markers, name) {
     element = document.getElementById(id);
     element.addEventListener('click', function (event) {
         deleteMarkers(markers);
-        createMarkers(data, kind, scale, markers);
+        createMarkers(data, kind, scale, markers,name);
         //クリックによるページ切替を行わない処理
         event.preventDefault();
         selectTxt(name);
@@ -88,7 +89,7 @@ $(document).ready(function () {
             {id: "d3", kind: "cod", scale: 10, name: "COD"},
             {id: "d4", kind: "water_temperature", scale: 4, name: "水温"},
             {id: "d5", kind: "total_residual_cl", scale: 150, name: "総残留塩素"},
-            {id: "d6", kind: "nh3_n", scale: 500, name: "アンモニウム態窒素"},
+            {id: "d6", kind: "nh3_n", scale: 200, name: "アンモニウム態窒素"},
             {id: "d7", kind: "ph", scale: 12, name: "ph"}
         ];
         var i;
@@ -98,6 +99,7 @@ $(document).ready(function () {
     });
 });
 
+//文字列を変更する関数
 function selectTxt(name) {
     document.getElementById("text").innerHTML=name;
 }
