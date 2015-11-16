@@ -62,7 +62,7 @@ function createMarkers(data, item, scale, markers, name) {
                     path: 'M 0 0 a ' + graph_w / 2 + ','+ arc_y +'  0 1 0 ' + graph_w + ' 0 v ' + (-data[i][item] * scale) + ' a ' + graph_w / 2 + ','+ arc_y +' 0 1 1 ' + -graph_w + ' 0 a ' + graph_w / 2 + ','+ arc_y +' 0 1 1 ' + graph_w + ' 0 a ' + graph_w / 2 + ','+ arc_y +' 0 1 1 ' + -graph_w + ' 0 z',
                     strokeColor: 'black',
                     strokeWeight: 2,
-                    fillColor: 'red',
+                    fillColor: 'cyan',
                     fillOpacity: 0.8
                 };
             }
