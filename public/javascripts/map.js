@@ -27,11 +27,11 @@ function createInfoWin(map,marker,data,i,item,name){
     //マーカー毎にinfoWindowを作成
     var infoWindow = new google.maps.InfoWindow({ 
         //情報ウィンドウ内に表示する
-        content: '場所：'+ data[i].place
-                + '<br>調査日時：'+ data[i].observed
+        content: '場所：'+ data[i].place + '公園'
+                + '<br>調査日：'+ data[i].observed
                 + '<br>天気：'+ data[i].weather
                 + '<br>'+ name +'：'+ data[i][item]
-
+                + '<br>生物：'
     }); 
     google.maps.event.addListener(marker,'click',function(){
         infoWindow.open(map,marker);
@@ -103,3 +103,4 @@ $(document).ready(function () {
 function selectTxt(name) {
     document.getElementById("text").innerHTML=name;
 }
+

@@ -5,9 +5,9 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
   
   #すべてのユーザーを表示するページ
-  # def index
-  #   @users = User.paginate(page: params[:page])
-  # end
+  def index
+    @users = User.paginate(page: params[:page])
+  end
   
   #特定のユーザーを表示するページ
   def show

@@ -1,5 +1,6 @@
 @import "bootstrap";
 
+
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
@@ -111,10 +112,28 @@ footer {
   }
 }
 
-#map{
-  width: 800px;
+#main{
   height: 500px;
 }
+
+#map{
+  background-color: black;
+  width: 740px;
+  height: 500px;
+	float: left;
+}
+
+#sidebar{
+  background-color: blue;
+	width: 200px;
+	float: right;
+}
+
+// #map{
+//   width: 800px;
+//   height: 500px;
+// }
+
 
 /* miscellaneous */
 
