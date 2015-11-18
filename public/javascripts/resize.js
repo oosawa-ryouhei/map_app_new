@@ -5,23 +5,21 @@
 function resizeWidth() {
     'use strict';
 
-    var mainWidth = $('#main').width(),
-        sidebarWidth = $('#sidebar').width();
+    var mainWidth = mainWidth = $(window).width() - 450;
 
-    $('#map').css('width', mainWidth - sidebarWidth);
+    $('#map').css('width', mainWidth);
 }
 
 // 高さ HEIGHT関数を宣言
 function resizeHeight() {
     'use strict';
 
-    var marginBottom = 20,
+    var marginBottom = 50,
         mainOffsetTop = $('#main').offset().top,
         mainHeight = $(window).height() - mainOffsetTop - marginBottom;
 
     $('#main').css('height', mainHeight + 'px');
     $('#map').css('height', mainHeight + 'px');
-    $('#sidebar').css('height', mainHeight + 'px');
 }
 
 // 画面のリサイズ
