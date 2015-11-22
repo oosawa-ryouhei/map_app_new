@@ -79,7 +79,7 @@ function createMarkers(data, item, scale, markers, name) {
     }
 }
 
-var settingEventlistener = function (id, kind, scale, data, markers, name) {
+var settingEventlistener = function (id, kind, scale, data, markers, name, measurement) {
     'use strict';
     var element;
     element = document.getElementById(id);
@@ -88,7 +88,7 @@ var settingEventlistener = function (id, kind, scale, data, markers, name) {
         createMarkers(data, kind, scale, markers,name);
         //クリックによるページ切替を行わない処理
         event.preventDefault();
-        selectTxt(name);
+        selectTxt(name,measurement);
     });
 };
 
@@ -96,22 +96,22 @@ $(document).ready(function () {
     'use strict';
     $.getJSON("/waterparks.json", function (data) {
         data_labels = [
-            {id: "d1", kind: "e_coli", scale: 1 / 40, name: "大腸菌"},
-            {id: "d2", kind: "coliform_bacteria", scale: 1 / 40, name: "大腸菌群"},
-            {id: "d3", kind: "cod", scale: 10, name: "COD"},
-            {id: "d4", kind: "total_residual_cl", scale: 150, name: "総残留塩素"},
-            {id: "d5", kind: "nh3_n", scale: 200, name: "アンモニウム態窒素"},
-            {id: "d6", kind: "electric_conductivity", scale: 1 / 5, name: "電気伝導度"}
+            {id: "d1", kind: "e_coli", scale: 1 / 40, name: "大腸菌", measurement: "(β-グルクロニダーゼ活性を指標とする酵素基質法)"},
+            {id: "d2", kind: "coliform_bacteria", scale: 1 / 40, name: "大腸菌群", measurement: "(β-ガラクトシダーゼ活性を指標とする酵素基質法)"},
+            {id: "d3", kind: "cod", scale: 10, name: "COD", measurement: "(アルカリ性過マンガン酸カリウム法)"},
+            {id: "d4", kind: "total_residual_cl", scale: 150, name: "総残留塩素", measurement: "(よう化カリウムとDPD比色法)"},
+            {id: "d5", kind: "nh3_n", scale: 200, name: "アンモニウム態窒素", measurement: "(塩素化剤とサリチル酸ナトリウム)"},
+            {id: "d6", kind: "electric_conductivity", scale: 1 / 5, name: "電気伝導度", measurement: "(Multiparameter tester PCSTestr35)"}
         ];
         var i;
         for (i = 0; i < data_labels.length; i = i + 1) {
-            settingEventlistener(data_labels[i].id, data_labels[i].kind, data_labels[i].scale, data, markers, data_labels[i].name);
+            settingEventlistener(data_labels[i].id, data_labels[i].kind, data_labels[i].scale, data, markers, data_labels[i].name, data_labels[i].measurement);
         }
     });
 });
 
 //文字列を変更する関数
-function selectTxt(name) {
-    document.getElementById("text").innerHTML=name;
+function selectTxt(name,measurement) {
+    document.getElementById("text").innerHTML = name /*+ measurement*/;
 }
 
