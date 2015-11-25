@@ -5,6 +5,12 @@ class WaterparksController < ApplicationController
   def index
     @waterparks = Waterpark.all
   end
+  
+  def import
+    # fileはtmpに自動で一時保存される
+    Waterpark.import(params[:file])
+    redirect_to root_url, notice: "データを追加しました。"
+  end
 
   # def create
   #   @waterpark = current_user.waterparks.build(waterpark_params)

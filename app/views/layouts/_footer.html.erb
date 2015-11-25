@@ -1,7 +1,12 @@
 <footer class="footer">
-  <nav>
-    <ul>
-      <!--<li><a href="http://news.railstutorial.jp/">News</a></li>-->
-    </ul>
-  </nav>
+  <% if signed_in? %>
+    <nav>
+      <ul>
+        <%= form_tag import_waterparks_path, multipart: true do %>
+          <%= file_field_tag :file %>
+          <%= submit_tag "インポート" %>
+        <% end %>
+      </ul>
+    </nav>
+  <% end %>
 </footer>

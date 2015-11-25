@@ -1,7 +1,10 @@
 MapApp::Application.routes.draw do
+  get "products/index"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :waterparks, only: [:index, :create, :destroy]
+  resources :waterparks, only: [:index, :create, :destroy] do
+    collection { post :import }
+  end
   root  'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

@@ -6,6 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+names = %w(レコーダー イヤホン マイク Webカメラ 洗濯機 冷蔵庫 エアコン ノートPC 40型TV デジタルカメラ)
+
+names.each do |name|
+  random = [*1..10].sample  # 1から10のランダム値を取得
+  Product.create! name: name, price: random * 1000, released_on: random.day.ago
+end
+
 require 'csv'
 
 def csv_import(csv_name)
