@@ -11,15 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124113105) do
-
-  create_table "products", force: true do |t|
-    t.string   "name"
-    t.integer  "price"
-    t.date     "released_on"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20151202103736) do
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -52,6 +44,9 @@ ActiveRecord::Schema.define(version: 20151124113105) do
     t.float    "ph"
     t.float    "electric_conductivity"
     t.string   "color"
+    t.string   "ecoli_color"
+    t.string   "aquatic_organism"
+    t.string   "dataset"
   end
 
   add_index "waterparks", ["user_id", "created_at"], name: "index_waterparks_on_user_id_and_created_at"

@@ -23,20 +23,21 @@ function deleteMarkers(markers) {
 }
 
 //情報ウィンドウを作成する関数
-function createInfoWin(map,marker,data,i,item,name){
+function createInfoWin(map, marker, data, i, item, name) {
+    'use strict';
     //マーカー毎にinfoWindowを作成
-    var infoWindow = new google.maps.InfoWindow({ 
+    var infoWindow = new google.maps.InfoWindow({
         //情報ウィンドウ内に表示する
-        content: '場所：'+ data[i].place + '公園'
-                + '<br>調査日：'+ data[i].observed
-                + '<br>天気：'+ data[i].weather
-                + '<br>水温：'+ data[i].water_temperature
-                + '<br>'+ name +'：'+ data[i][item]
-                + '<br>ph：'+ data[i].ph
-                + '<br>生物：'
-    }); 
-    google.maps.event.addListener(marker,'click',function(){
-        infoWindow.open(map,marker);
+        content: '場所：' + data[i].place
+                + '<br>調査日：' + data[i].observed
+                + '<br>天気：' + data[i].weather
+                + '<br>水温：' + data[i].water_temperature
+                + '<br>' + name + '：' + data[i][item]
+                + '<br>ph：' + data[i].ph
+                + '<br>生物：' + data[i].aquatic_organism
+    });
+    google.maps.event.addListener(marker, 'click', function () {
+        infoWindow.open(map, marker);
     });
 }
 
@@ -49,17 +50,25 @@ function createMarkers(data, item, scale, markers, name) {
     var i, icon, marker;
     for (i = 0; i < data.length; i = i + 1) {
         if (data[i][item] !== null) {
-            if(item === "cod"){
+            if (item === "cod") {
                 icon = {
-                    path: 'M 0 0 a ' + graph_w / 2 + ','+ arc_y +'  0 1 0 ' + graph_w + ' 0 v ' + (-data[i][item] * scale) + ' a ' + graph_w / 2 + ','+ arc_y +' 0 1 1 ' + -graph_w + ' 0 a ' + graph_w / 2 + ','+ arc_y +' 0 1 1 ' + graph_w + ' 0 a ' + graph_w / 2 + ','+ arc_y +' 0 1 1 ' + -graph_w + ' 0 z',
+                    path: 'M 0 0 a ' + graph_w / 2 + ',' + arc_y + '  0 1 0 ' + graph_w + ' 0 v ' + (-data[i][item] * scale) + ' a ' + graph_w / 2 + ',' + arc_y + ' 0 1 1 ' + -graph_w + ' 0 a ' + graph_w / 2 + ',' + arc_y + ' 0 1 1 ' + graph_w + ' 0 a ' + graph_w / 2 + ',' + arc_y + ' 0 1 1 ' + -graph_w + ' 0 z',
                     strokeColor: 'black',
                     strokeWeight: 2,
                     fillColor: data[i].color,
                     fillOpacity: 0.8
                 };
+            } else if (item === "e_coli") {
+                icon = {
+                    path: 'M 0 0 a ' + graph_w / 2 + ',' + arc_y + '  0 1 0 ' + graph_w + ' 0 v ' + (-data[i][item] * scale) + ' a ' + graph_w / 2 + ',' + arc_y + ' 0 1 1 ' + -graph_w + ' 0 a ' + graph_w / 2 + ',' + arc_y + ' 0 1 1 ' + graph_w + ' 0 a ' + graph_w / 2 + ',' + arc_y + ' 0 1 1 ' + -graph_w + ' 0 z',
+                    strokeColor: 'black',
+                    strokeWeight: 2,
+                    fillColor: data[i].ecoli_color,
+                    fillOpacity: 0.8
+                };
             } else {
                 icon = {
-                    path: 'M 0 0 a ' + graph_w / 2 + ','+ arc_y +'  0 1 0 ' + graph_w + ' 0 v ' + (-data[i][item] * scale) + ' a ' + graph_w / 2 + ','+ arc_y +' 0 1 1 ' + -graph_w + ' 0 a ' + graph_w / 2 + ','+ arc_y +' 0 1 1 ' + graph_w + ' 0 a ' + graph_w / 2 + ','+ arc_y +' 0 1 1 ' + -graph_w + ' 0 z',
+                    path: 'M 0 0 a ' + graph_w / 2 + ',' + arc_y + '  0 1 0 ' + graph_w + ' 0 v ' + (-data[i][item] * scale) + ' a ' + graph_w / 2 + ',' + arc_y + ' 0 1 1 ' + -graph_w + ' 0 a ' + graph_w / 2 + ',' + arc_y + ' 0 1 1 ' + graph_w + ' 0 a ' + graph_w / 2 + ',' + arc_y + ' 0 1 1 ' + -graph_w + ' 0 z',
                     strokeColor: 'black',
                     strokeWeight: 2,
                     fillColor: 'cyan',
@@ -74,7 +83,7 @@ function createMarkers(data, item, scale, markers, name) {
                 icon: icon
             });
             markers.push(marker);
-            createInfoWin(map,marker,data,i,item,name);
+            createInfoWin(map, marker, data, i, item, name);
         }
     }
 }
@@ -85,10 +94,10 @@ var settingEventlistener = function (id, kind, scale, data, markers, name, measu
     element = document.getElementById(id);
     element.addEventListener('click', function (event) {
         deleteMarkers(markers);
-        createMarkers(data, kind, scale, markers,name);
+        createMarkers(data, kind, scale, markers, name);
         //クリックによるページ切替を行わない処理
         event.preventDefault();
-        selectTxt(name,measurement,info);
+        selectTxt(name, measurement, info);
     });
 };
 
@@ -96,12 +105,12 @@ $(document).ready(function () {
     'use strict';
     $.getJSON("/waterparks.json", function (data) {
         data_labels = [
-            {id: "d1", kind: "e_coli", scale: 1 / 40, name: "大腸菌", measurement: "(β-グルクロニダーゼ活性を指標とする酵素基質法)", info: "大腸菌の説明" },
-            {id: "d2", kind: "coliform_bacteria", scale: 1 / 40, name: "大腸菌群", measurement: "(β-ガラクトシダーゼ活性を指標とする酵素基質法)", info: "大腸菌群の説明" },
-            {id: "d3", kind: "cod", scale: 10, name: "COD", measurement: "(アルカリ性過マンガン酸カリウム法)", info: "CODの説明" },
-            {id: "d4", kind: "total_residual_cl", scale: 150, name: "総残留塩素", measurement: "(よう化カリウムとDPD比色法)", info: "総残留塩素の説明" },
-            {id: "d5", kind: "nh3_n", scale: 200, name: "アンモニウム態窒素", measurement: "(塩素化剤とサリチル酸ナトリウム)", info: "アンモニウム態窒素の説明" },
-            {id: "d6", kind: "electric_conductivity", scale: 1 / 5, name: "電気伝導度", measurement: "(Multiparameter tester PCSTestr35)", info: "電気伝導度の説明" }
+            {id: "d1", kind: "e_coli", scale: 1 / 40, name: "大腸菌", measurement: "β-グルクロニダーゼ活性を指標とする酵素基質法", info: "大腸菌の説明"},
+            {id: "d2", kind: "coliform_bacteria", scale: 1 / 40, name: "大腸菌群", measurement: "β-ガラクトシダーゼ活性を指標とする酵素基質法", info: "大腸菌群の説明"},
+            {id: "d3", kind: "cod", scale: 10, name: "COD", measurement: "アルカリ性過マンガン酸カリウム法", info: "CODの説明"},
+            {id: "d4", kind: "total_residual_cl", scale: 150, name: "総残留塩素", measurement: "よう化カリウムとDPD比色法", info: "総残留塩素の説明"},
+            {id: "d5", kind: "nh3_n", scale: 200, name: "アンモニウム態窒素", measurement: "塩素化剤とサリチル酸ナトリウム", info: "アンモニウム態窒素の説明"},
+            {id: "d6", kind: "electric_conductivity", scale: 1 / 5, name: "電気伝導度", measurement: "Multiparameter tester PCSTestr35", info: "電気伝導度の説明"}
         ];
         var i;
         for (i = 0; i < data_labels.length; i = i + 1) {
@@ -111,7 +120,8 @@ $(document).ready(function () {
 });
 
 //文字列を変更する関数
-function selectTxt(name,measurement,info) {
-    document.getElementById("text").innerHTML = name + measurement;
-    document.getElementById("info").innerHTML = info;
+function selectTxt(name, measurement, info) {
+    'use strict';
+    document.getElementById("text").innerHTML = name;
+    document.getElementById("info").innerHTML = info + "<br>測定方法:" + measurement;
 }
