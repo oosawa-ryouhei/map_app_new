@@ -123,8 +123,9 @@ $(document).ready(function () {
 function selectTxt(name, measurement, info) {
     'use strict';
     document.getElementById("text").innerHTML = name;
-    document.getElementById("info").innerHTML = "<font size = 4><strong>" + info + "</strong></font>"
-                                                + "<br>"
-                                                + "<br><font size = 3 color = red>測定方法:</font><br>"
-                                                + "『" + measurement + "』";
+    document.getElementById("info").innerHTML = "<font size = 4><strong>" + name + "の説明</strong></font>"
+            + "<br>" + info
+            + "<br>"
+            + "<br><font size = 3 color = red>測定方法:</font><br>"
+            + "『" + measurement + "』";
 }
