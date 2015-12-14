@@ -5,11 +5,18 @@
     <title>水辺空間の水質調査のマッピング</title>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <link rel="stylesheet" href="vender/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="vender/bootstrap-select/bootstrap-select.min.css">
+
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
 </head>
 <body>
     <%= render 'layouts/header' %>
+    
+
+
+    
     <div class="container">
         <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
