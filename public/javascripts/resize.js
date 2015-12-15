@@ -8,7 +8,7 @@ function resizeWidth() {
     var mainWidth = $('#main').width(),
         sidebarWidth = $('#sidebar').width();
 
-    $('#map').css('width', mainWidth - sidebarWidth - 12);
+    $('#map').css('width', mainWidth - sidebarWidth - 22);
 }
 
 // 高さ HEIGHT関数を宣言
@@ -21,7 +21,7 @@ function resizeHeight() {
 
     $('#main').css('height', mainHeight + 'px');
     $('#map').css('height', mainHeight + 'px');
-    $('#sidebar').css('height', mainHeight + 'px');
+    $('#sidebar').css('height', mainHeight - 10 + 'px');
 }
 
 // 画面のリサイズ
