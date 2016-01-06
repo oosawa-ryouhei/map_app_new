@@ -28,13 +28,13 @@ function createInfoWin(map, marker, data, i, item, name) {
     //マーカー毎にinfoWindowを作成
     var infoWindow = new google.maps.InfoWindow({
         //情報ウィンドウ内に表示する
-        content: '場所：' + data[i].place
-                + '<br>調査日：' + data[i].observed
-                + '<br>天気：' + data[i].weather
-                + '<br>水温：' + data[i].water_temperature
-                + '<br>' + name + '：' + data[i][item]
-                + '<br>ph：' + data[i].ph
-                + '<br>生物：' + data[i].aquatic_organism
+        content: '<strong>場所</strong>：' + data[i].place
+                + '<br><strong>調査日</strong>：' + data[i].observed
+                + '<br><strong>天気</strong>：' + data[i].weather
+                + '<br><strong>水温</strong>：' + data[i].water_temperature
+                + '<br><strong>' + name + '</strong>：' + data[i][item]
+                + '<br><strong>ph</strong>：' + data[i].ph
+                + '<br><strong>生物</strong>：' + data[i].aquatic_organism
     });
     google.maps.event.addListener(marker, 'click', function () {
         infoWindow.open(map, marker);
@@ -51,7 +51,6 @@ function createMarkers(data, item, scale, markers, name, datasets_selected) {
     var i, icon, marker;
     for (i = 0; i < data.length; i = i + 1) {
         if (data[i][item] !== null) {
-        //if (datasets_selected[i] === data[i].dataset) {
             if (item === "cod") {
                 
                 icon = {
@@ -74,7 +73,7 @@ function createMarkers(data, item, scale, markers, name, datasets_selected) {
                     path: 'M 0 0 a ' + graph_w / 2 + ',' + arc_y + '  0 1 0 ' + graph_w + ' 0 v ' + (-data[i][item] * scale) + ' a ' + graph_w / 2 + ',' + arc_y + ' 0 1 1 ' + -graph_w + ' 0 a ' + graph_w / 2 + ',' + arc_y + ' 0 1 1 ' + graph_w + ' 0 a ' + graph_w / 2 + ',' + arc_y + ' 0 1 1 ' + -graph_w + ' 0 z',
                     strokeColor: 'black',
                     strokeWeight: 2,
-                    fillColor: 'cyan',
+                    fillColor: 'pink',
                     fillOpacity: 0.8
                 };
             }
@@ -140,7 +139,7 @@ $(document).ready(function () {
         });  
         data_labels = [
             {id: "d1", kind: "e_coli", scale: 1 / 40, name: "大腸菌", measurement: "β-グルクロニダーゼ活性を指標とする酵素基質法", info: "大腸菌の説明"},
-            {id: "d2", kind: "coliform_bacteria", scale: 1 / 40, name: "大腸菌群", measurement: "β-ガラクトシダーゼ活性を指標とする酵素基質法", info: "大腸菌群の説明"},
+            {id: "d2", kind: "coliform_bacteria", scale: 1 / 100, name: "大腸菌群", measurement: "β-ガラクトシダーゼ活性を指標とする酵素基質法", info: "大腸菌群の説明"},
             {id: "d3", kind: "cod", scale: 10, name: "COD", measurement: "アルカリ性過マンガン酸カリウム法", info: "CODの説明"},
             {id: "d4", kind: "total_residual_cl", scale: 150, name: "総残留塩素", measurement: "よう化カリウムとDPD比色法", info: "総残留塩素の説明"},
             {id: "d5", kind: "nh3_n", scale: 200, name: "アンモニウム態窒素", measurement: "塩素化剤とサリチル酸ナトリウム", info: "アンモニウム態窒素の説明"},
@@ -162,15 +161,14 @@ function selectTxt(name, measurement, info) {
             + "<br>[ ここに頂いた説明文が入ります。 ]"
             //+ "<br>" + info
             + "<br>"
-            + "<br><font size = 4><strong>測定方法:</strong></font><br>"
+            + "<br><font size = 4><strong>測定方法</strong></font><br>"
             + "『" + measurement + "』"
             + "<br>"
-            + "<br><font size = 4><strong>グラフの色分け基準値</strong></font>"
-            + "<br><font color = cyan>適：水色</font>"
+            + "<br><font size = 4><strong>環境省水浴場水質判定基準</strong></font>"
+            + "<br><font color = blue>■</font>適：水色"
             + "<br>-大腸菌：100個/100ml以下<br>-COD:2mg/1以下<br>"
-            + "<br><font color = green>可：緑</font>"
+            + "<br><font color = green>■</font>可：緑"
             + "<br>-大腸菌：1,000個/100ml以下<br>-COD:8mg/1以下<br>"
-            + "<br><font color = red>不適：赤</font>"
-            + "<br>-大腸菌：1,000個/100ml超<br>-COD:8mg/1超";
-    
+            + "<br><font color = red>■</font>不適：赤"
+            + "<br>-大腸菌：1,000個/100ml超<br>-COD:8mg/1超<br>";
 }
