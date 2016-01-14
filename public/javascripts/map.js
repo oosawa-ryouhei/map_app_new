@@ -138,12 +138,12 @@ $(document).ready(function () {
             
         });  
         data_labels = [
-            {id: "d1", kind: "e_coli", scale: 1 / 40, name: "大腸菌", measurement: "β-グルクロニダーゼ活性を指標とする酵素基質法", info: "大腸菌の説明"},
-            {id: "d2", kind: "coliform_bacteria", scale: 1 / 100, name: "大腸菌群", measurement: "β-ガラクトシダーゼ活性を指標とする酵素基質法", info: "大腸菌群の説明"},
-            {id: "d3", kind: "cod", scale: 10, name: "COD", measurement: "アルカリ性過マンガン酸カリウム法", info: "CODの説明"},
-            {id: "d4", kind: "total_residual_cl", scale: 150, name: "総残留塩素", measurement: "よう化カリウムとDPD比色法", info: "総残留塩素の説明"},
-            {id: "d5", kind: "nh3_n", scale: 200, name: "アンモニウム態窒素", measurement: "塩素化剤とサリチル酸ナトリウム", info: "アンモニウム態窒素の説明"},
-            {id: "d6", kind: "electric_conductivity", scale: 1 / 5, name: "電気伝導度", measurement: "Multiparameter tester PCSTestr35", info: "電気伝導度の説明"}
+            {id: "d1", kind: "e_coli", scale: 1 / 40, name: "大腸菌", measurement: "β-グルクロニダーゼ活性を指標とする酵素基質法", info: "グラム陰性の桿菌で通性嫌気性菌に属し、環境中に存在するバクテリアの主要な種の一つである。この菌は腸内細菌でもあり、ヒトなどの場合大腸に生息する。"},
+            {id: "d2", kind: "coliform_bacteria", scale: 1 / 100, name: "大腸菌群", measurement: "β-ガラクトシダーゼ活性を指標とする酵素基質法", info: "グラム陰性無芽胞性の短桿菌であり、乳糖を分解して酸とガスを産生する好気性または通性嫌気性の細菌群。細菌分類学上の大腸菌を必ずしも示すわけではなく、衛生学的に糞便汚染の指標とされてきた一群の菌の総称である。"},
+            {id: "d3", kind: "cod", scale: 10, name: "COD", measurement: "アルカリ性過マンガン酸カリウム法", info: "水中の被酸化性物質を酸化するために必要とする酸素量で示したものである。 代表的な水質の指標の一つであり、酸素消費量とも呼ばれる。"},
+            {id: "d4", kind: "total_residual_cl", scale: 150, name: "総残留塩素", measurement: "よう化カリウムとDPD比色法", info: "水道の水の中に存在させることが必要な遊離残留塩素と結合残留塩素とを合わせたもので、その水に含まれる物質に対する殺菌や酸化反応に有効に作用し得る塩素化合物のことを指す。"},
+            {id: "d5", kind: "nh3_n", scale: 200, name: "アンモニウム態窒素", measurement: "塩素化剤とサリチル酸ナトリウム", info: "窒素成分のうちアンモニウム塩であるものをいう。肥料成分や水処理などで用いられる用語で、環境汚染の指標としても用いられる。<br>水系においてアンモニア態窒素が高い場合は、屎尿などによる汚染が近い時期にあったことを示している。"},
+            {id: "d6", kind: "electric_conductivity", scale: 1 / 5, name: "電気伝導度", measurement: "Multiparameter tester PCSTestr35", info: "物質の電気伝導のしやすさを表す物性値。"}
         ];
         
         for (i = 0; i < data_labels.length; i = i + 1) {
@@ -157,18 +157,18 @@ $(document).ready(function () {
 function selectTxt(name, measurement, info) {
     'use strict';
     document.getElementById("text").innerHTML = name;
-    document.getElementById("info").innerHTML = "<font size = 4><strong>" + name + "の説明</strong></font>"
-            + "<br>[ ここに頂いた説明文が入ります。 ]"
-            //+ "<br>" + info
+    document.getElementById("info").innerHTML = "<font size = 4><strong>●　" + name + "の説明</strong></font>"
+            //+ "<br>[ ここに頂いた説明文が入ります。 ]"
+            + "<br>　" + info
             + "<br>"
-            + "<br><font size = 4><strong>測定方法</strong></font><br>"
+            + "<br><font size = 4><strong>●　測定方法</strong></font><br>"
             + "『" + measurement + "』"
             + "<br>"
-            + "<br><font size = 4><strong>環境省水浴場水質判定基準</strong></font>"
-            + "<br><font color = blue>■</font>適：水色"
+            + "<br><font size = 4><strong>●　環境省水浴場水質判定基準（グラフの色）</strong></font>"
+            + "<br><font color = cyan>■　</font>適：水色"
             + "<br>-大腸菌：100個/100ml以下<br>-COD:2mg/1以下<br>"
-            + "<br><font color = green>■</font>可：緑"
+            + "<br><font color = green>■　</font>可：緑"
             + "<br>-大腸菌：1,000個/100ml以下<br>-COD:8mg/1以下<br>"
-            + "<br><font color = red>■</font>不適：赤"
+            + "<br><font color = red>■　</font>不適：赤"
             + "<br>-大腸菌：1,000個/100ml超<br>-COD:8mg/1超<br>";
 }
